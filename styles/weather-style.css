@@ -1,0 +1,182 @@
+body {
+    background-image: url('../images/sunset.jpg');
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+    font-family: 'Roboto', sans-serif;
+
+}
+
+.body_dark {
+    background-image: url('../images/sunrise.jpg');
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.container-fluid {
+    background-color: rgb(255, 255, 255, 30%);
+    padding: 50px 10px 50px 10px;
+    margin-top: 20px;
+}
+
+.modal-header-dark {
+    background-color: #212529;
+    color: white;
+}
+
+.modal-body-dark {
+    background-color: #212529;
+}
+
+.modal-footer-dark {
+    background-color: #212529;
+    color: white;
+}
+
+.btn-close-dark {
+    background-color: white;
+}
+
+.dark-main {
+    background-color: rgba(10, 10, 10, 0.3);
+    padding: 50px 10px 50px 10px;
+    margin-top: 20px;
+}
+
+.labels-dark {
+    color: white;
+}
+
+.title {
+    text-align: center;
+    font-size: xx-large;
+    color: white;
+    font-weight: bold;
+}
+
+.title-dark {
+    color: #212529;
+
+}
+
+.buttons {
+    text-align: center;
+}
+
+.requiredField {
+    font-weight: bold;
+    color: rgba(206, 20, 20, 0.589);
+}
+
+.error-message {
+    font-weight: bolder;
+    color: rgba(238, 15, 15);
+}
+
+
+.form-control-dark,
+.form-select-dark {
+    background-color: #212529;
+    color: white;
+    font-weight: bold;
+}
+
+
+
+
+#tabContent {
+    background-color: #FFFFFF;
+}
+
+#holder {
+    height: 100%;
+    width: 100%;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.tab-content-dark {
+    background-color: #212529;
+    color: rgb(255, 255, 255);
+}
+
+#icon {
+    width: 70%;
+    height: 100%;
+
+}
+
+.central {
+    text-align: center;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.really-bold {
+    font-weight: bolder;
+}
+
+.blue-text {
+    color: #0275d8;
+}
+
+.red-text {
+    color: rgb(177, 11, 11);
+}
+
+
+.map {
+    height: 400px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-top: 1em;
+}
+
+.lflow {
+    float: left;
+}
+
+.flow {
+    overflow: auto;
+}
+
+.filler {
+    height: 100px;
+}
+
+/*Code to change color of active link*/
+.nav-tabs>.active>a {
+    color: #0275d8 !important;
+    background-color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+
+.nav-link.active {
+    color: #0275d8 !important;
+    font-weight: bold !important;
+}
+
+
+.nav-tabs>:not(.active)>a {
+    color: rgb(255, 255, 255);
+    background-color: #0275d8;
+    font-weight: bold;
+}
+
+.hunhun{
+    height: 100%;
+    width: 100%;
+}

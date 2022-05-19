@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Weather Forecast Search</title>
+
+    <!-- CSS PART -->
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/css/ol.css" type="text/css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/css/ol.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="styles/weather-style.css" type="text/css">
+
+
+    <!-- JAVASCRIPT PART-->
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js" defer></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js" defer></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" defer>
+    </script>
+    <script src="https://npmcdn.com/tether@1.2.4/dist/js/tether.min.js" defer>
+    </script>
+    <!-- Latest compiled and minified javascript library -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"
+        defer>
+    </script>
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" defer
+        crossorigin="anonymous">
+    </script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js" defer>
+    </script>
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js" defer>
+    </script>
+
+    <script src="scripts/dark-theme-and-modals.js" defer></script>
+    <script src="scripts/functional-script.js" defer></script>
+
+
+</head>
+
+<body id="body">
+    <button id="dark-button" class="btn alert-light" style="float: right;" onclick="turnToBlack()"><i id="icon_switch"
+            class="fa fa-moon-o  "></i>
+    </button>
+
+    <br />
+    <p class="title" id="site_title">Weather Forecast Search</p>
+
+
+    <!-- Base container for interaction-->
+    <div id="base-window" class="container-fluid col-lg-9 col-11 col-xl-9 rounded">
+
+        <form id="formIn" class="row g-3 needs-validation" novalidate>
+
+            <!-- Address form -->
+            <div class="col-auto col-12 col-xl-3">
+                <label for="AddressInput" id="labels_form1">Address<span class="requiredField">&nbsp;*</span></label>
+                <br />
+                <input name="Address" type="text" class="form-control" id="AddressInput" placeholder="Enter address"
+                    pattern=".*[^ ].*" required>
+                <!-- Error Message-->
+                <div id="er1" class="invalid-feedback bolder">
+                    Please enter your address!
+                </div>
+            </div>
+
+            <!-- Region form -->
+            <div class="col-auto col-12 col-xl-2">
+                <label for="RegionInput" id="labels_form2">Region<span class="requiredField">&nbsp;*</span></label>
+                <br />
+                <input type="text" class="form-control input" id="RegionInput" placeholder="Enter region"
+                    pattern=".*[^ ].*" required>
+                <!-- Error Message-->
+                <div id="er2" class="invalid-feedback bolder">
+                    Please enter your region!
+                </div>
+            </div>
+
+            <!-- City list -->
+            <div class="col-auto col-12 col-xl-2">
+                <label for="CitySelection" id="labels_form3">City<span class="requiredField">&nbsp;*</span></label>
+                <br />
+                <select class="form-select" id="CitySelection" required>
+                    <option selected disabled value="" id="default_dropdown">Select city</option>
+                </select>
+                <!-- Error Message-->
+                <div id="er3" class="invalid-feedback bolder">
+                    Please select your city!
+                </div>
+            </div>
+
+            <!-- Degree rdio -->
+            <div class="col-auto col-12 col-md-12  col-lg-12 col-xl-2">
+
+                <label for="degreeRadio" id="labels_form4">Degree<span class="requiredField">&nbsp;*</span></label>
+                <br />
+                <fieldset>
+                    <div class="some-class" id="radio_temp">
+                        <input type="radio" class="radio" name="tempRadio" value="metric" id="c" checked="checked">
+                        <label for="metric" id="labels_form5">°C</label>
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <input type="radio" class="radio" name="tempRadio" value="imperial" id="f" />
+                        <label for="imperial" id="labels_form6">°F</label>
+                    </div>
+                </fieldset>
+            </div>
+
+            <!-- Buttons only from now on -->
+            <div class="col-auto col-11 col-md-12 col-lg-12 col-xl-3   buttons">
+                <br />
+
+                <button id="search" type="submit" title="submit weather forecast search" class="btn btn-primary"><i
+                        class="fa fa-search" formnovalidate></i> Search</button>
+
+                <button type="reset" id="reset" title="clear form" class="btn btn-danger"><i
+                        class="fa fa-ban"></i></button>
+
+                <button type="button" id="logbtn" title="open log" class="btn btn-warning" data-bs-toggle="modal"
+                    data-bs-target="#exampleModalGrid"><i class="fa fa-bars"></i></button>
+            </div>
+
+            <!-- Done with buttons -->
+
+            <!-- Country list -->
+            <div class="col-auto col-0 col-xl-3">
+                <!-- Buffer -->
+            </div>
+            <div class="col-auto col-12 col-xl-6">
+                <label for="CountrySelection" id="labels_form7">Country<span
+                        class="requiredField">&nbsp;*</span></label>
+                <br />
+                <select class="form-select" id="CountrySelection" onchange="getCities()">
+                    <option value="Cyprus" selected hidden id="default_dropdown">Cyprus</option>
+                </select>
+            </div>
+            <div class="col-auto col-0 col-xl-3">
+                <!-- Buffer -->
+            </div>
+        </form>
+
+    </div>
+    <!-- End of base container for interaction-->
+
+    <!-- Log Modal -->
+    <div class="modal fade" id="exampleModalGrid" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header" id="modal_header">
+                    <h5 class="modal-title bold" id="exampleModalLabel">Last 5 requests</h5>
+                    <button type="button" id="modal_close" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body" id="modal_body">
+                    <div class="table-responsive">
+                    <table class="table table-striped " id="last_five_table">
+                        <thead id="last_five_head">
+                            <tr>
+                                <th class="central bold">Time</th>
+                                <th class="central bold">Address</th>
+                                <th class="central bold">Region</th>
+                                <th class="central bold">City</th>
+                                <th class="central bold">Country</th>
+                            </tr>
+                        </thead>
+                        <tbody id="last_five_body">
+                        </tbody>
+                    </table>
+                </div> 
+                </div>
+
+                <div class="modal-footer" id="modal_footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Log Modal End -->
+    <!-- Right now and Next 24 hours tabs-->
+    <br />
+    <div id="extraWindow" class="col-xl-8 container hidden">
+        <!-- hidden -->
+        <!-- hidden-->
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs">
+            <li class="nav-item ">
+                <a class="nav-link active dark_item" id="right_now_tab" data-bs-toggle="tab" href="#rightnow">Right
+                    Now</a>
+            </li>
+            <li class="nav-item  ">
+                <a class="nav-link dark_item" id="next_24_tab" data-bs-toggle="tab" href="#nexthours">Next 24
+                    hours</a>
+            </li>
+            <li class="nav-item ">
+                <a class="nav-link dark_item" id="general_tab" data-bs-toggle="tab" href="#general">General Info</a>
+            </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content" id="tabContent">
+            <div class="tab-pane container fade show active" id="rightnow" role="tabpanel"
+                aria-labelledby="right_now_tab">
+                <div class="row ">
+                    <div class="col-xl-6 col-12" id="red">
+
+                        <div class="row ">
+                            <div class="col-xl-6 col-6">
+                                <img id="icon" class="hunhun" />
+                            </div>
+
+                            <div class="col-xl-6 col-6 central">
+                                <br />
+                                <div id="weather_description"></div>
+                                <h1 id="temperature" class="bold"></h1>
+                                <div id="lowhigh"><span id="low" class="blue-text bold"></span>&nbsp;|&nbsp;<span
+                                        id="high" class="red-text bold"></span></div>
+                            </div>
+                        </div>
+                        <div class="table-responsive"> 
+                        <table class="table table-striped" id="right_now_table">
+                            <tbody>
+                                <tr>
+                                    <td class="col-xl-6 col-6 bold central">Pressure</td>
+                                    <td class="col-xl-6 col-6 bold central" id="pressure"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="col-xl-6 col-6 bold central">Humidity</td>
+                                    <td class="col-xl-6 col-6 bold central" id="humidity"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="col-xl-6 col-6 bold central">Wind Speed</td>
+                                    <td class="col-xl-6 col-6 bold central" id="windspeed"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="col-xl-6 col-6 bold central">Cloud Cover</td>
+                                    <td class="col-xl-6 col-6 bold central" id="cloudcover"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="col-xl-6 col-6 bold central">Sunrise</td>
+                                    <td class="col-xl-6 col-6 bold central" id="sunrise"></td>
+
+                                </tr>
+                                <tr>
+                                    <td class="col-xl-6 col-6 bold central">Sunset</td>
+                                    <td class="col-xl-6 col-6 bold central" id="sunset"></td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                    <!-- Map -->
+                    <div class="col-xl-6 col-12" id="blue">
+                        <div id="map" class="map col-xl-6 col-12 "></div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 24 -->
+            <div class="tab-pane container fade" id="nexthours" role="tabpanel" aria-labelledby="next_24_tab">
+                <div class="row">
+                    <div class="col-xl-12 col-12" id="blue">
+                        <div class="table-responsive">
+                        <table class="table table-striped " id="next_24_table">
+                            <thead>
+                                <tr>
+                                    <th class="central">Time</th>
+                                    <th class="central">Summary</th>
+                                    <th class="central">Temp</th>
+                                    <th class="central">Cloud Cover</th>
+                                    <th class="central">Details</th>
+                                </tr>
+                            </thead>
+                            <tbody id="next_24_table_body">
+                                <!-- Filled by Javascript -->
+
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- General Information -->
+
+            <div class="tab-pane container fade " id="general" role="tabpanel" aria-labelledby="generalTab">
+                <div class="row ">
+
+                    <div class="col-auto col-12 col-xl-6" id="not_card_holder">
+                        <div class="row ">
+                            <div class="filler">
+                                <br />
+                                <h2 class="central" id="info_title"></h2>
+                            </div>
+                        </div>
+                        <!-- Buffer -->
+                        <div class="table-responsive">
+                        <table class="table table-striped" id="info_table">
+                            <tbody>
+                                <tr>
+                                    <td class="col-xl-6 col-6 bold central">Name</td>
+                                    <td class="col-xl-6 col-6 bold central" id="ctr"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="col-xl-6 col-6 bold central">GDP</td>
+                                    <td class="col-xl-6 col-6 bold central" id="gdp"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="col-xl-6 col-6 bold central">Surface Area</td>
+                                    <td class="col-xl-6 col-6 bold central" id="surarea"></td>
+                                </tr>
+                                <tr>
+                                    <td class="col-xl-6 col-6 bold central">Forested Area</td>
+                                    <td class="col-xl-6 col-6 bold central" id="forarea"></td>
+
+                                </tr>
+
+                                <tr>
+                                    <td class="col-xl-6 col-6 bold central">Currency</td>
+                                    <td class="col-xl-6 col-6 bold central" id="curr"></td>
+                                </tr>
+
+                                <tr>
+                                    <td class="col-xl-6 col-6 bold central">Population</td>
+                                    <td class="col-xl-6 col-6 bold central" id="popu"></td>
+
+                                </tr>
+                                <tr>
+                                    <td class="col-xl-6 col-6 bold central">Population Density</td>
+                                    <td class="col-xl-6 col-6 bold central" id="popden"></td>
+
+                                </tr>
+                                <tr>
+                                    <td class="col-xl-6 col-6 bold central">Internet Users</td>
+                                    <td class="col-xl-6 col-6 bold central" id="intus"></td>
+
+                                </tr>
+                                <tr>
+                                    <td class="col-xl-6 col-6 bold central">CO<sub>2</sub> Emissions</td>
+                                    <td class="col-xl-6 col-6 bold central" id="co2"></td>
+
+                                </tr>
+                                <tr>
+                                    <td class="col-xl-6 col-6 bold central">Threatened Species</td>
+                                    <td class="col-xl-6 col-6 bold central" id="tspec"></td>
+
+                                </tr>
+                                <tr>
+                                    <td class="col-xl-6 col-6 bold central">Male Life Expectancy</td>
+                                    <td class="col-xl-6 col-6 bold central" id="mall"></td>
+
+                                </tr>
+                                <tr>
+                                    <td class="col-xl-6 col-6 bold central">Female Life Expectancy</td>
+                                    <td class="col-xl-6 col-6 bold central" id="fmall"></td>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+                     </div>
+                    </div>
+
+                    <!-- Card -->
+                    <div class="col-12 col-xl-6" id="card_holder">
+                        <div class="card" id="card">
+                            <img id="insert_capital" src="" class="card-img-top img-thumbnail" alt="Capital City" />
+                            <div class="card-body" id="card-body">
+                                <div class="flow">
+                                    <h5 class="card-title lflow really-bold" id="insert_capital_title">
+                                    </h5>
+                                    <div class="lflow">&nbsp;&nbsp;&nbsp;</div>
+                                    <img id="insert_capital_flag" height="22px" width="40px" class="lflow" src="" />
+                                    <br />
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+            <!-- E N D -->
+        </div>
+    </div>
+
+
+    <!-- 24 hour modal  -->
+    <div class="modal fade" id="exampleModalGrid2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header" id="modal_header2">
+                    <h5 class="modal-title bold" id="exampleModalLabel2">Weather in <span id="insert_city"></span> on
+                        <span id="insert_date"> </span></h5>
+                    <button type="button" id="modal_close2" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body" id="modal_body2">
+                    <div class="row">
+                        <div class="col-xl-6 col-6 central" id="iconimage">
+                            <!-- Filled by Javascript -->
+                            <img id="actual_icon" src="" alt="weather icon" height="42" width="42"/>
+                        </div>
+                        <div class="col-xl-6 col-6 central" id="weatinfo">
+                            <!-- Filled by Javascript -->
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div id="h2" class="col-xl-4 col-4 central really-bold">
+                            Humidity
+                        </div>
+                        <div id="p2" class="col-xl-4 col-4 central really-bold">
+                            Pressure
+                        </div>
+                        <div id="ws2" class="col-xl-4 col-4 central really-bold">
+                            Wind Speed
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-4 col-4 central" id="humi">
+                            <!-- Filled by Javascript -->
+                        </div>
+                        <div class="col-xl-4 col-4 central" id="pres">
+                            <!-- Filled by Javascript -->
+                        </div>
+                        <div class="col-xl-4 col-4 central" id="wspe">
+                            <!-- Filled by Javascript -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer" id="modal_footer2">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 24 hour modal end  -->
+</body>
+
+</html>

@@ -1,5 +1,12 @@
-# Weather-Forecast-Site
-This is a complete project that uses the OpenWeather API to show weather forecast for a city.
+• requested functionality that was not implemented
+
+    All Done.
+
+• any modifications/additions you have done over and above the requested functionalities
+
+    I have implemented the basic functionalities requested. 
+
+• any bonus functionality/ies that you may have implemented (see below for bonus)
 
     1) Dark Theme: Press the button in the right up corner and most of 
        the html elements activate their dark theme version (implemented
@@ -46,3 +53,7 @@ This is a complete project that uses the OpenWeather API to show weather forecas
                            3.2.3) Geographical Info: Using the last api calls we create a string with 
                                   the capital of the country and the general are where the country is 
                                   located.
+                            
+• the full url to your web application on the CS webserver
+ 
+ https://www.cs.ucy.ac.cy/~mbofos01/epl425/
