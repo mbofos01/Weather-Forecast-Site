@@ -1,5 +1,5 @@
 # Weather-Forecast-Site
-This is a complete project that uses the OpenWeather API to show weather forecast for a city.
+This is a complete project that uses the OpenWeather API to show weather forecast for any city.
 
     1) Dark Theme: Press the button in the right up corner and most of 
        the html elements activate their dark theme version (implemented
