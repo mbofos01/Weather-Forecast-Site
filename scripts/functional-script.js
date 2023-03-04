@@ -766,7 +766,7 @@ function sendData(address, region, city, country) {
     data.region = region;
     data.city = city;
     data.country = country;
-    xhr.send(JSON.stringify(data));
+    //xhr.send(JSON.stringify(data));
 
 }
 
@@ -833,7 +833,7 @@ function getLast() {
         }
     };
     xhr.open('GET', './php/sql_communication.php?how_many=5&username=mbofos01');
-    xhr.send();
+    //xhr.send();
 
 }
 
