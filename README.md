@@ -1,5 +1,5 @@
 # Weather-Forecast-Site
-This is a complete project that uses the OpenWeather API to show weather forecast for any city. You can check it <a href="https://mbofos01.github.io/Weather-Forecast-Site/" target="_blank">here</a>!
+This is a complete project that uses the OpenWeather API to show weather forecast for any city. You can check it <a href="https://mbofos01.github.io/Weather-Forecast-Site/" target="_blank" rel="noreferrer noopener">here</a>!
 
     1) Dark Theme: Press the button in the right up corner and most of 
        the html elements activate their dark theme version (implemented
